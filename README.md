@@ -1,13 +1,8 @@
 # Flutter Scalable OCR
 
-`v1.0.1`
+This package is a wrapper around [flutter_scalable_ocr](https://pub.dev/packages/flutter_scalable_ocr). It tackles the issue of fetching data just from part od a camera and also narowing down the camera viewport which was common problem.
 
-Flutter scalable OCR package is a wrapper around [Google ML kit Text Recognition](https://pub.dev/packages/google_mlkit_text_recognition). It tackles the issue of fetching data just from part od a camera and also narowing down the camera viewport which was common problem. To see how it work in real case scenario you can check the app where it was used [Exchange Rate Scanner](https://www.erscanner.com/) and here are some gifs from example project.
-
-<p float="left">
-  <img src="https://user-images.githubusercontent.com/30495155/214034242-c9ef8046-f193-4c7b-8fed-483ccc277511.gif" width="300" />
-  <img src="https://user-images.githubusercontent.com/30495155/214034570-c305c19b-3d81-4a09-8e54-f395916f065e.gif" width="300" />
-</p>
+https://github.com/KobayashiYoh/flutter_scalable_ocr/assets/82624334/26b49717-96a8-4b07-ad79-e61d7bbd6d54
 
 ## Requirements
 
@@ -48,28 +43,33 @@ Parameters:
 | `boxBottomOff`   |  Scalable center square bottom    | 2.7      |
 | `boxRightOff`    |  Scalable center square right  | 4        |
 | `boxTopOff`      |  Scalable center square top   | 2.7      |
+| `centerRadius`      |  Radius of center RRect   | Radius.zero      |
 | `paintboxCustom`      |  Narrowed square in camera window  | from example|
 | `boxHeight`      |  Camera Window height | from example      |
 | `getScannedText`      |  Callback function that returns string |     |
 | `getRawData`      |  Callback function that returns list of `TextElement`     |
+| `cameraMarginColor`      | Color of camera margin     |
 
 Use widget:
 
 ```dart
 ScalableOCR(
-    paintboxCustom: Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 4.0
-        ..color = const Color.fromARGB(153, 102, 160, 241),
-    boxLeftOff: 4,
-    boxBottomOff: 2.7,
-    boxRightOff: 4,
-    boxTopOff: 2.7,
-    boxHeight: MediaQuery.of(context).size.height / 5,
-    getRawData: (value) {
-        inspect(value);
-    },
-    getScannedText: (value) {
-        setText(value);
-    }),
+  paintboxCustom: Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 4.0
+    ..color = Colors.blue,
+  boxLeftOff: 5,
+  boxBottomOff: 2.5,
+  boxRightOff: 5,
+  boxTopOff: 2.5,
+  centerRadius: const Radius.circular(8.0),
+  boxHeight: MediaQuery.of(context).size.height / 3,
+  getRawData: (value) {
+    inspect(value);
+  },
+  getScannedText: (value) {
+    setText(value);
+  },
+  cameraMarginColor: const Color(0xCC000000),
+),
 ```
